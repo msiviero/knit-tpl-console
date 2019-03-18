@@ -6,12 +6,21 @@
   "bin": {
     "{{=it.templateName}}": "./dist/main.js"
   },
+  "pkg": {
+    "targets": [
+      "latest-macos-x64",
+      "latest-linux-x64",
+      "latest-alpine-x64",
+      "latest-win-x64"
+    ]
+  },
   "description": "Generated project - {{=it.templateName}}",
   "scripts": {
     "build": "npm run-script clean && npm run-script lint && tsc -p ./tsconfig.build.json",
+    "pkg": "npm run-script build && pkg . --output ./bin/{{=it.templateName}}",
     "test": "jest --detectOpenHandles",
     "lint": "tslint -c ./tslint.json -p tsconfig.json",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist && rimraf bin",
     "deploy": "npm run-script lint && npm run-script build && npm publish --access public"
   },
   "devDependencies": {
@@ -19,6 +28,7 @@
     "@types/node": "^11.11.3",
     "@types/pino": "^5.8.5",
     "jest": "^24.5.0",
+    "pkg": "^4.3.7",
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.3",
