@@ -1,4 +1,3 @@
-
 import { Container, injectable } from "@msiviero/knit";
 import { Service } from "./service/service";
 
@@ -12,6 +11,6 @@ class Application {
   }
 }
 
-export const runner = () => {
+export const runner = (): void => {
   Container.getInstance().resolve(Application).run();
 };
